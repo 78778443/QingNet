@@ -63,4 +63,4 @@ class NetV2(nn.Module):
 if __name__ == '__main__':
     net = NetV2()
     x = torch.randn(3, 3, 300, 300)
-    print(net(x)[0].shape)
+    print(net(x)[2].shape)
