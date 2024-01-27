@@ -27,11 +27,15 @@ class Predictor:
 
 
 if __name__ == '__main__':
+
+    DEVICE = 'cuda:0'
+    # DEVICE = 'cpu'
     predictor = Predictor('param/' + max(os.listdir('param/')))
     test_dataset = YellowDataset('data/test')  # 创建测试数据集
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=True)
 
     for i, (img, label, position, sort, img_path) in enumerate(test_dataloader):
+        img, label, position, sort = img.to(DEVICE), label.to(DEVICE), position.to(DEVICE), sort.to(DEVICE)
         # 直接使用获取到的图像文件路径
         img_path = img_path[0]  # 注意：img_path是一个包含单个元素的列表
         out_label, out_position, out_sort,confidence = predictor.predict(img_path)
