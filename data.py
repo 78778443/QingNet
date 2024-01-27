@@ -4,8 +4,6 @@ import torch
 
 from torch.utils.data import Dataset
 import os
-from torch.nn.functional import one_hot
-from PIL import Image
 
 
 class YellowDataset(Dataset):
@@ -25,15 +23,15 @@ class YellowDataset(Dataset):
     # 获取数据集中特定索引的数据项
     def __getitem__(self, index):
         # 获取索引对应的数据
-        data = self.dataset[index]
+        img_path = self.dataset[index]
         # 读取图像数据
-        img = cv2.imread(data)
+        img = cv2.imread(img_path)
         # 对图像数据进行归一化处理
         img = img / 255
         # 转换为PyTorch张量并对维度进行排列
         img = torch.tensor(img).permute(2, 0, 1)
         # 将数据按'.'分割为列表
-        data_list = data.split('.')
+        data_list = img_path.split('.')
         # 获取标签
         label = int(data_list[1])
         # 获取位置信息
@@ -44,9 +42,9 @@ class YellowDataset(Dataset):
         sort = int(data_list[6]) - 1
 
         # 返回处理后的图像数据、标签、位置信息和排序信息
-        return np.float32(img), np.float32(label), np.float32(position), sort
+        return np.float32(img), np.float32(label), np.float32(position), sort, img_path
 
 
 if __name__ == '__main__':
     data = YellowDataset('data/train')
-    print(data[1][3])
+    print(data[1][4])

@@ -25,6 +25,12 @@ class NetV2(nn.Module):
             nn.Conv2d(128, 25, 3),  # 2维卷积层，输入通道数为128，输出通道数为25，卷积核大小为3x3
             nn.ReLU()  # ReLU激活函数
         )
+
+        self.confidence_layer = nn.Sequential(
+            nn.Conv2d(25, 1, 3),  # 为置信度分数添加一个通道
+            nn.Sigmoid(),  # 应用 Sigmoid 激活以确保值在 0 到 1 之间
+        )
+
         self.label_layer = nn.Sequential(  # 标签层
             nn.Conv2d(25, 1, 3),  # 2维卷积层，输入通道数为25，输出通道数为1，卷积核大小为3x3
             nn.ReLU(),  # ReLU激活函数
@@ -48,6 +54,11 @@ class NetV2(nn.Module):
         label = torch.squeeze(label, dim=2)
         label = torch.squeeze(label, dim=2)
         label = torch.squeeze(label, dim=1)
+
+        confidence = self.confidence_layer(out)  # 新增：置信度分数
+        confidence = torch.squeeze(confidence, dim=2)
+        confidence = torch.squeeze(confidence, dim=2)
+
         # 使用position层获取位置信息
         position = self.position_layers(out)
         position = torch.squeeze(position, dim=2)
@@ -57,7 +68,7 @@ class NetV2(nn.Module):
         sort = torch.squeeze(sort, dim=2)
         sort = torch.squeeze(sort, dim=2)
         # 返回label, position, sort
-        return label, position, sort
+        return label, position, sort, confidence
 
 
 if __name__ == '__main__':
