@@ -3,15 +3,15 @@ import torch
 import cv2
 from torch.utils.data import DataLoader
 
-from data import YellowDataset
-from net import NetV2
+from data import QingDataset
+from net import QingNet
 
 from tools import tools
 
 
 class Predictor:
     def __init__(self, weight_path):
-        self.net = NetV2()
+        self.net = QingNet()
         self.net.load_state_dict(torch.load(weight_path))
         self.net.eval()
 
@@ -28,10 +28,10 @@ class Predictor:
 
 if __name__ == '__main__':
 
-    DEVICE = 'cuda:0'
-    # DEVICE = 'cpu'
+    # DEVICE = 'cuda:0'
+    DEVICE = 'cpu'
     predictor = Predictor('param/' + max(os.listdir('param/')))
-    test_dataset = YellowDataset('data/test')  # 创建测试数据集
+    test_dataset = QingDataset('data/test')  # 创建测试数据集
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=True)
 
     for i, (img, label, position, sort, img_path) in enumerate(test_dataloader):

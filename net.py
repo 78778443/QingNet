@@ -2,9 +2,9 @@ from torch import nn
 import torch
 
 
-class NetV2(nn.Module):
+class QingNet(nn.Module):
     def __init__(self):
-        super(NetV2, self).__init__()  # 初始化Net_v2类，继承自父类的初始化方法
+        super(QingNet, self).__init__()  # 初始化Net_v2类，继承自父类的初始化方法
         self.layers = nn.Sequential(  # 创建网络的序列结构
             nn.Conv2d(3, 16, 3),  # 2维卷积层，输入通道数为3，输出通道数为16，卷积核大小为3x3
             nn.ReLU(),  # ReLU激活函数
@@ -72,6 +72,6 @@ class NetV2(nn.Module):
 
 
 if __name__ == '__main__':
-    net = NetV2()
+    net = QingNet()
     x = torch.randn(3, 3, 300, 300)
     print(net(x)[2].shape)

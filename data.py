@@ -6,7 +6,7 @@ from torch.utils.data import Dataset
 import os
 
 
-class YellowDataset(Dataset):
+class QingDataset(Dataset):
     # 初始化方法，传入root参数
     def __init__(self, root):
         # 创建一个空的数据集列表
@@ -46,5 +46,5 @@ class YellowDataset(Dataset):
 
 
 if __name__ == '__main__':
-    data = YellowDataset('data/train')
+    data = QingDataset('data/train')
     print(data[1][4])

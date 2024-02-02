@@ -4,12 +4,12 @@ from torch import nn, optim
 import torch
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-from data import YellowDataset
-from net import NetV2
+from data import QingDataset
+from net import QingNet
 from tools import tools
 
-DEVICE = 'cuda:0'
-# DEVICE = 'cpu'
+# DEVICE = 'cuda:0'
+DEVICE = 'cpu'
 
 
 class Train:
@@ -18,14 +18,14 @@ class Train:
         self.test = test
         # 初始化函数
         self.summaryWriter = SummaryWriter('logs')  # 创建SummaryWriter对象
-        self.train_dataset = YellowDataset(root=root)  # 创建训练数据集
-        self.test_dataset = YellowDataset('data/test')  # 创建测试数据集
+        self.train_dataset = QingDataset(root=root)  # 创建训练数据集
+        self.test_dataset = QingDataset('data/test')  # 创建测试数据集
         # 创建训练数据加载器
         self.train_dataloader = DataLoader(self.train_dataset, batch_size=100, shuffle=True)
         # 创建测试数据加载器
         self.test_dataloader = DataLoader(self.test_dataset, batch_size=50, shuffle=True)
         # 创建神经网络对象
-        self.net = NetV2().to(DEVICE)
+        self.net = QingNet().to(DEVICE)
         # 如果权重路径存在
         if os.path.exists(weight_path):
             # 加载模型权重
@@ -142,6 +142,6 @@ if __name__ == '__main__':
     param = ''
     if os.listdir('param/'):
         param = 'param/' + max(os.listdir('param/'))
-    train = Train('data/train', param,True,False)
+    train = Train('data/train', param, True, False)
     # train = Train('data/train', param,False,True)
     train()
