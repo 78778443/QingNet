@@ -5,6 +5,9 @@
 
 > 项目地址：https://github.com/78778443/QingNet
 
+![2cb275c57191210c34c09f65c48a7a9](https://github.com/78778443/QingNet/assets/8509054/3bb5cfda-08d3-4bec-86e0-d61b6e61f80c)
+
+
 ### 1.1 项目概要
 要实现目标检测系统，离不开数据加载器，网络模型，训练脚本，预测脚本这四大项；
 
