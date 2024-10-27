@@ -5,6 +5,7 @@
 
 > 项目地址：https://github.com/78778443/QingNet
 
+数据集地址: 链接: https://pan.baidu.com/s/1Sv45FBxYUhCQioVN6qmuTg?pwd=4ijk 提取码: 4ijk  
 ![2cb275c57191210c34c09f65c48a7a9](https://github.com/78778443/QingNet/assets/8509054/3bb5cfda-08d3-4bec-86e0-d61b6e61f80c)
 
 
